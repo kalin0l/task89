@@ -1,7 +1,6 @@
 import EventEmitter from "eventemitter3";
 import image from "../images/planet.svg";
 
-let _loading = document.querySelector("progress");
 const box = document.querySelector(".box");
 // const progresBar =
 const div = document.querySelector(".main");
@@ -15,6 +14,7 @@ export default class Application extends EventEmitter {
 
   constructor() {
     super();
+    let _loading = document.querySelector("progress");
 
     const box = document.createElement("div");
     box.classList.add("box");
@@ -35,7 +35,17 @@ export default class Application extends EventEmitter {
 
       const res = await fetch("https://swapi.boom.dev/api/planets");
       const data = await res.json();
-
+      const res1 = await fetch("https://swapi.boom.dev/api/planets?page=2");
+      const data1 = await res.json();
+      const res2 = await fetch("https://swapi.boom.dev/api/planets?page=3");
+      const data2 = await res.json();
+      const res3 = await fetch("https://swapi.boom.dev/api/planets?page=4");
+      const data3 = await res.json();
+      const res4 = await fetch("https://swapi.boom.dev/api/planets?page=5");
+      const data4 = await res.json();
+      const res5 = await fetch("https://swapi.boom.dev/api/planets?page=6");
+      const data5 = await res.json();
+      
       this._stopLoading();
 
       this._create(data);
