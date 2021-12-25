@@ -1,10 +1,8 @@
 import EventEmitter from "eventemitter3";
 import image from "../images/planet.svg";
 
-const box = document.querySelector(".box");
-// const progresBar =
 const div = document.querySelector(".main");
-const _loading = document.querySelector("progress");
+// const _loading = document.querySelector("progress");
 
 
 export default class Application extends EventEmitter {
@@ -59,14 +57,19 @@ export default class Application extends EventEmitter {
     }
   }
   _create(data) {
+    
     data.results.forEach((element) => {
       console.log(element.name);
     });
   }
   _startLoading() {
+    const _loading = document.querySelector(".progress");
+    _loading.style.display = 'block';
     div.appendChild(_loading);
   }
   _stopLoading() {
+    const _loading = document.querySelector(".progress");
+    _loading.style.display = 'none';
     div.removeChild(_loading);
   }
 
