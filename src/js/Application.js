@@ -2,7 +2,6 @@ import EventEmitter from "eventemitter3";
 import image from "../images/planet.svg";
 
 const div = document.querySelector(".main");
-const _loading = document.querySelector(".progress");
 
 
 export default class Application extends EventEmitter {
@@ -12,6 +11,7 @@ export default class Application extends EventEmitter {
       READY: "ready",
     };
   }
+  _loading = document.querySelector('.progress');
 
   constructor() {
     super();
@@ -30,7 +30,6 @@ export default class Application extends EventEmitter {
   }
 
   async _load() {
-    const _loading = document.querySelector(".progress");
     try {
       this._startLoading();
       
