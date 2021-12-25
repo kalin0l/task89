@@ -1,6 +1,11 @@
 import EventEmitter from "eventemitter3";
 import image from "../images/planet.svg";
 
+let _loading = document.querySelector("progress");
+const box = document.querySelector(".box");
+// const progresBar =
+const div = document.querySelector(".main");
+
 export default class Application extends EventEmitter {
   static get events() {
     return {
@@ -24,7 +29,36 @@ export default class Application extends EventEmitter {
     this.emit(Application.events.READY);
   }
 
-  _render({ name, terrain, population }) {
+  async _load() {
+    try {
+      this._startLoading();
+
+      const res = await fetch("https://swapi.boom.dev/api/planets");
+      const data = await res.json();
+
+      this._stopLoading();
+
+      this._create(data);
+      console.log(data);
+      return data;
+    } catch (err) {
+      this._stopLoading();
+      console.log(err);
+    }
+  }
+  _create(data) {
+    data.results.forEach((element) => {
+      console.log(element.name);
+    });
+  }
+  _startLoading() {
+    div.appendChild(_loading);
+  }
+  _stopLoading() {
+    div.removeChild(_loading);
+  }
+
+  _render({ name, terrain, population, image }) {
     return `
 <article class="media">
   <div class="media-left">
@@ -45,3 +79,5 @@ export default class Application extends EventEmitter {
     `;
   }
 }
+
+// const planet = new Application();
