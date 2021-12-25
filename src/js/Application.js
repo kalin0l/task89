@@ -2,7 +2,7 @@ import EventEmitter from "eventemitter3";
 import image from "../images/planet.svg";
 
 const div = document.querySelector(".main");
-// const _loading = document.querySelector("progress");
+const _loading = document.querySelector(".progress");
 
 
 export default class Application extends EventEmitter {
@@ -30,8 +30,11 @@ export default class Application extends EventEmitter {
   }
 
   async _load() {
+    const _loading = document.querySelector(".progress");
     try {
       this._startLoading();
+      _loading.style.display = 'block';
+
 
       const res = await fetch("https://swapi.boom.dev/api/planets");
       const data = await res.json();
@@ -47,6 +50,7 @@ export default class Application extends EventEmitter {
       const data5 = await res5.json();
       
       this._stopLoading();
+      _loading.style.display = 'none';
 
       this._create(data);
       console.log(data,data1,data2,data3,data4,data5);
@@ -63,13 +67,12 @@ export default class Application extends EventEmitter {
     });
   }
   _startLoading() {
-    const _loading = document.querySelector(".progress");
-    _loading.style.display = 'block';
+    
+    
     div.appendChild(_loading);
   }
   _stopLoading() {
-    const _loading = document.querySelector(".progress");
-    _loading.style.display = 'none';
+    
     div.removeChild(_loading);
   }
 
