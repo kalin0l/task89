@@ -4,8 +4,11 @@ import image from "../images/planet.svg";
 const box = document.querySelector(".box");
 // const progresBar =
 const div = document.querySelector(".main");
+const _loading = document.querySelector("progress");
+
 
 export default class Application extends EventEmitter {
+  
   static get events() {
     return {
       READY: "ready",
@@ -14,7 +17,6 @@ export default class Application extends EventEmitter {
 
   constructor() {
     super();
-    let _loading = document.querySelector("progress");
 
     const box = document.createElement("div");
     box.classList.add("box");
@@ -36,20 +38,20 @@ export default class Application extends EventEmitter {
       const res = await fetch("https://swapi.boom.dev/api/planets");
       const data = await res.json();
       const res1 = await fetch("https://swapi.boom.dev/api/planets?page=2");
-      const data1 = await res.json();
+      const data1 = await res1.json();
       const res2 = await fetch("https://swapi.boom.dev/api/planets?page=3");
-      const data2 = await res.json();
+      const data2 = await res2.json();
       const res3 = await fetch("https://swapi.boom.dev/api/planets?page=4");
-      const data3 = await res.json();
+      const data3 = await res3.json();
       const res4 = await fetch("https://swapi.boom.dev/api/planets?page=5");
-      const data4 = await res.json();
+      const data4 = await res4.json();
       const res5 = await fetch("https://swapi.boom.dev/api/planets?page=6");
-      const data5 = await res.json();
+      const data5 = await res5.json();
       
       this._stopLoading();
 
       this._create(data);
-      console.log(data);
+      console.log(data,data1,data2,data3,data4,data5);
       return data;
     } catch (err) {
       this._stopLoading();
